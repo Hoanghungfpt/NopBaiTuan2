@@ -41,4 +41,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/spnLoaiSach"
         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtNamxb"
+        android:textColorHint="@color/black"
+        android:hint="Nhâp năm xuất bản"
+        />
 </LinearLayout>

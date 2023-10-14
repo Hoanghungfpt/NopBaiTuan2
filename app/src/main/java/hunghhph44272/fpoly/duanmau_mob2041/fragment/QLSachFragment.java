@@ -70,6 +70,7 @@ public class QLSachFragment extends Fragment {
         EditText edttensach = view.findViewById(R.id.edttensach);
         EditText edttien = view.findViewById(R.id.edttien);
         Spinner spnloaisach = view.findViewById(R.id.spnLoaisach);
+        EditText edtnamxb = view.findViewById(R.id.edtnamxb);
 
         SimpleAdapter simpleAdapter = new SimpleAdapter(
                 getContext(),
@@ -86,7 +87,8 @@ public class QLSachFragment extends Fragment {
                 int tien = Integer.parseInt(edttien.getText().toString());
                 HashMap<String,Object> hs = (HashMap<String, Object>) spnloaisach.getSelectedItem();
                 int maloai = (int) hs.get("maLoai");
-                boolean check = sachDAO.themSachMoi(tensach,tien,maloai);
+                int namXuatBan = Integer.parseInt(edtnamxb.getText().toString());
+                boolean check = sachDAO.themSachMoi(tensach,tien,maloai,namXuatBan);
                 if (check){
                     Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     //load data
@@ -116,6 +118,7 @@ public class QLSachFragment extends Fragment {
             HashMap<String,Object> hs = new HashMap<>();
             hs.put("maLoai",loaiSach.getMaLoai());
             hs.put("tenLoai",loaiSach.getTenLoai());
+
             listHM.add(hs);
         }
         return listHM;

@@ -56,6 +56,8 @@ public class sachAdapter extends RecyclerView.Adapter<sachAdapter.ViewHolder> {
         holder.txtgiathue.setText(String.valueOf(list.get(position).getGiaThue()));
         holder.txtmaloai.setText(String.valueOf(list.get(position).getMaLoai()));
         holder.txttenloai.setText(list.get(position).getTenloai());
+        holder.txtNamXuatBan.setText(String.valueOf(list.get(position).getNamXuatBan()));
+
 
         holder.imgedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +96,7 @@ public class sachAdapter extends RecyclerView.Adapter<sachAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtmasach, txttensach, txtgiathue, txtmaloai, txttenloai;
+        TextView txtmasach, txttensach, txtgiathue, txtmaloai, txttenloai,txtNamXuatBan;
         ImageView imgdelete, imgedit;
 
         public ViewHolder(@NonNull View itemView) {
@@ -104,6 +106,7 @@ public class sachAdapter extends RecyclerView.Adapter<sachAdapter.ViewHolder> {
             txtgiathue = itemView.findViewById(R.id.txtgiathue);
             txtmaloai = itemView.findViewById(R.id.txtmaLoai);
             txttenloai = itemView.findViewById(R.id.txtTenLoai);
+            txtNamXuatBan = itemView.findViewById(R.id.txtNamXuatBan);
 
             imgdelete = itemView.findViewById(R.id.imgDelete);
             imgedit = itemView.findViewById(R.id.imgedit);
@@ -121,6 +124,7 @@ public class sachAdapter extends RecyclerView.Adapter<sachAdapter.ViewHolder> {
         EditText edttien = view.findViewById(R.id.edtien);
         TextView txtmasach = view.findViewById(R.id.txtmaSach);
         Spinner spnLoaiSach = view.findViewById(R.id.spnLoaiSach);
+        EditText edtNamxb = view.findViewById(R.id.edtNamxb);
 
         txtmasach.setText("Mã sách:"+ sach.getMaSach());
         edttsach.setText(sach.getTenSach());
@@ -151,7 +155,8 @@ public class sachAdapter extends RecyclerView.Adapter<sachAdapter.ViewHolder> {
                 int tien = Integer.parseInt(edttien.getText().toString());
                 HashMap<String,Object> hs = (HashMap<String, Object>) spnLoaiSach.getSelectedItem();
                 int maloai = (int) hs.get("maLoai");
-                boolean check = sachDAO.capnhatThongTinSach(sach.getMaSach(),tensach,tien,maloai);
+                int namXuatBan = Integer.parseInt(edtNamxb.getText().toString());
+                boolean check = sachDAO.capnhatThongTinSach(sach.getMaSach(),tensach,tien,maloai,namXuatBan);
                 if (check){
                     Toast.makeText(context, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     //load data

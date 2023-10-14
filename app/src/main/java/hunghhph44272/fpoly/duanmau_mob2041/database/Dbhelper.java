@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class Dbhelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "PNLIB";
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 4;
 
     static final String CREATE_TABLE_THU_THU =
             "CREATE TABLE ThuThu(maTT TEXT PRIMARY KEY," +
@@ -33,7 +33,8 @@ public class Dbhelper extends SQLiteOpenHelper {
                     "maSach INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "tenSach TEXT NOT NULL, " +
                     "giaThue INTEGER NOT NULL, " +
-                    "maLoai INTEGER REFERENCES LoaiSach (maLoai))";
+                    "maLoai INTEGER REFERENCES LoaiSach (maLoai),"+
+                    "namXuatBan INTEGER NOT NULL)";
 
     static final String CREATE_TABLE_PHIEU_MUON =
             "create table PhieuMuon (" +
@@ -44,6 +45,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                     "tienThue INTEGER NOT NULL," +
                     "ngay TEXT NOT NULL," +
                     "traSach INTEGER NOT NULL )";
+
 
     public Dbhelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -62,8 +64,9 @@ public class Dbhelper extends SQLiteOpenHelper {
         //TAO BANG PHIẾU MƯỢN
         db.execSQL(CREATE_TABLE_PHIEU_MUON);
 
+
         db.execSQL("INSERT INTO LoaiSach VALUES (1,'JAVA'),(2,'JAVAScript'),(3,'HTML')");
-        db.execSQL("INSERT INTO Sach VALUES (1,'JAVA 1',2500,1),(2,'JAVAScript',3000,1),(3,'HTML cơ bản',2000,1)");
+        db.execSQL("INSERT INTO Sach VALUES (1,'JAVA 1',2500,1,2020),(2,'JAVAScript',3000,1,2022),(3,'HTML cơ bản',2000,1,2023)");
         db.execSQL("INSERT INTO ThanhVien VALUES (1,'Hoàng Huy Hùng','2003'),(2,'Trần Văn A','2000'),(3,'Trần Văn B','2001')");
         db.execSQL("INSERT INTO ThuThu VALUES ('admin','ADMIN Hoàng Huy Hùng','admin','ADMIN'),('thuthu01','Nguyễn Văn B','12345','ThuThu')");
         db.execSQL("INSERT INTO PhieuMuon VALUES (1,'thuthu01',1,1,2500,'10/06/2023', 1),(2,'thuthu02',2,2,3000,'20/07/2023',0),(3,'thuthu03',3,7,2000,'21/08/2003',1)");
